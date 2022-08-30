@@ -58,9 +58,12 @@ const ModalContent = (props: any) => {
     });
     
     const onSubmit = (data: any) => {
-        console.log(getValues());
         content.button1.function()
     }
+    const onSubmit2 = (data: any) => {
+        content.button1.function(getValues())
+    }
+
     return (
             <ModalContainer>
                 <Header>
@@ -118,17 +121,13 @@ const ModalContent = (props: any) => {
                 : content.id === 3
                     ? (
                     <>
-                    <form>
+                    <form onSubmit={handleSubmit(onSubmit2)}>
                     <Main>{content.main}
                         <ConfirmArea content={content} count={count} getValues={getValues} />
                             </Main>
                     
                     <Footer>
-                        <Button
-                                onClick={() => content.button1.function(getValues())}
-                                color="YELLOW"
-                                Name={content.button1.value}
-                            />
+                        <button type="submit" disabled={!isValid}>送信</button>
                             {content.button2 ? (
                                 <Button
                                     color="BLUE"
